@@ -1,9 +1,14 @@
-import PropTypes from "prop-types";
 import styles from "./ImageCard.module.css";
+import { Image } from '../App/App.types';
 
-const ImageCard = ({ image, onClick }) => {
+interface ImageCardProps {
+  image: Image;
+  onClick: (image: Image) => void;
+}
+
+const ImageCard: React.FC<ImageCardProps> = ({ image, onClick }) => {
   return (
-    <li className={styles.item} >
+    <li className={styles.item}>
       <div className={styles.card}>
         <img
           onClick={() => onClick(image)}
@@ -14,11 +19,6 @@ const ImageCard = ({ image, onClick }) => {
       </div>
     </li>
   );
-};
-
-ImageCard.propTypes = {
-  image: PropTypes.object.isRequired,
-  onClick: PropTypes.func.isRequired,
 };
 
 export default ImageCard;

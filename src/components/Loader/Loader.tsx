@@ -1,11 +1,10 @@
 import { Oval } from "react-loader-spinner";
 import styles from "./Loader.module.css";
 
-const Loader = () => {
+const Loader: React.FC = () => {
   return (
     <div className={styles.loaderContainer}>
       <Oval
-        className={styles.loader}
         height={80}
         width={80}
         color="blue"
