@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Image } from './App.types';
+import { Image } from "./App.types";
+import { ApiResponse } from "./App.types";
 import SearchBar from "../SearchBar/SearchBar";
 import ImageGallery from "../ImageGallery/ImageGallery";
 import Loader from "../Loader/Loader";
@@ -9,9 +10,7 @@ import toast, { Toaster } from "react-hot-toast";
 import ImageModal from "../ImageModal/ImageModal";
 import styles from "./App.module.css";
 
-
-
-const App:React.FC = () => {
+const App: React.FC = () => {
   const [images, setImages] = useState<Image[]>([]);
   const [query, setQuery] = useState<string>("");
   const [page, setPage] = useState<number>(1);
@@ -19,14 +18,15 @@ const App:React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [selectedImage, setSelectedImage] = useState<Image | null>(null);
   const ACCESS_KEY = "-sJCLq8E-9EKutcywgbvCSzdprDJNev8CkeRnE8FKmQ";
-  
-  const fetchImages = async (query: string, page: number) => {
+
+  const fetchImages = async (query: string, page: number): Promise<void> => {
     setIsLoading(true);
     try {
       const response = await fetch(
         `https://api.unsplash.com/search/photos?page=${page}&query=${query}&client_id=${ACCESS_KEY}`
       );
-      const data = await response.json();
+      ` `;
+      const data: ApiResponse = await response.json();
       if (page === 1) {
         setImages(data.results);
       } else {
